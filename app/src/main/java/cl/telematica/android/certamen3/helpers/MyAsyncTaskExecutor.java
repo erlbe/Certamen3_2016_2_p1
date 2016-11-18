@@ -2,6 +2,7 @@ package cl.telematica.android.certamen3.helpers;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 
 import org.json.JSONArray;
@@ -20,8 +21,6 @@ import cl.telematica.android.certamen3.models.Feed;
 
 public class MyAsyncTaskExecutor {
 
-    private RecyclerView.Adapter mAdapter;
-
     private static MyAsyncTaskExecutor instance;
 
     public static MyAsyncTaskExecutor getInstance() {
@@ -31,7 +30,7 @@ public class MyAsyncTaskExecutor {
         return instance;
     }
 
-    public void executeMyAsynctask(final Activity activity, final RecyclerView mRecyclerView) {
+    public void executeMyAsynctask(final Activity activity, final RecyclerView mRecyclerView, final DataAdapter mAdapter) {
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
 
             @Override
@@ -51,7 +50,7 @@ public class MyAsyncTaskExecutor {
                     System.out.println(result);
 
                     //Why god... why
-                    mAdapter = new DataAdapter(activity, getFeeds(result));
+                    mAdapter.setDataset(getFeeds(result));
                     mRecyclerView.setAdapter(mAdapter);
                 }
             }

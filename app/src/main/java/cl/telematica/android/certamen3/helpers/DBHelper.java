@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cl.telematica.android.certamen3.FavoriteDatabase;
 
 /**
@@ -67,5 +70,21 @@ public class DBHelper {
         }
         cursor.close();
         return true;
+    }
+
+    public List<String> getFavorites(){
+        SQLiteDatabase db = favoriteDatabase.getReadableDatabase();
+
+        List<String> links = new ArrayList<String>();
+        Cursor cursor = db.rawQuery("SELECT * FROM favorites", null);
+
+        if(cursor.moveToFirst()){
+            do{
+                String link = cursor.getString(0);
+                links.add(link);
+            } while(cursor.moveToNext());
+        }
+        cursor.close();
+        return links;
     }
 }

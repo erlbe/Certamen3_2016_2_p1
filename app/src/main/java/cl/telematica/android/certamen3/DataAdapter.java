@@ -100,4 +100,13 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     public int getItemCount() {
         return mDataset.size();
     }
+
+    public void setDataset(List<Feed> myDataset){
+        this.mDataset = myDataset;
+        notifyDataSetChanged();
+    }
+
+    public List<Feed> getDataset(){
+        return this.mDataset;
+    }
 }
