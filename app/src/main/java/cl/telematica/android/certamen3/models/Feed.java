@@ -1,7 +1,10 @@
-package cl.telematica.android.certamen3;
+package cl.telematica.android.certamen3.models;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import cl.telematica.android.certamen3.FavoriteDatabase;
 
 /**
  * Created by franciscocabezas on 11/18/16.

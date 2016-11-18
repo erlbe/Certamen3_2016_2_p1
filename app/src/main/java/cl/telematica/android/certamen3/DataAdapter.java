@@ -2,6 +2,7 @@ package cl.telematica.android.certamen3;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+
+import cl.telematica.android.certamen3.helpers.DBHelper;
+import cl.telematica.android.certamen3.models.Feed;
 
 /**
  * Created by franciscocabezas on 11/18/16.
@@ -79,11 +83,14 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
                 /**
                  * In this section, you have to manage the add behavior on local database
                  */
+
                 feed.setFavorite(!feed.isFavorite());
                 if(feed.isFavorite()) {
                     holder.mAddBtn.setText(mContext.getString(R.string.added));
+                    DBHelper.getInstance().addFavorite(feed.getLink());
                 } else {
                     holder.mAddBtn.setText(mContext.getString(R.string.like));
+                    DBHelper.getInstance().removeFavorite(feed.getLink());
                 }
             }
         });
